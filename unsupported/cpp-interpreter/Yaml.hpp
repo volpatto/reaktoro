@@ -17,6 +17,9 @@
 
 #pragma once
 
+// c++ includes
+#include <functional>
+
 // yaml-cpp includes
 #include <yaml-cpp/yaml.h>
 
