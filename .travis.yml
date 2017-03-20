@@ -1,5 +1,6 @@
 language: c++
 dist: trusty
+sudo: required
 before_install:
   - sudo apt-get install libboost-dev
 script:
@@ -7,3 +8,4 @@ script:
   - cmake --version
   - cmake ..
   - make
+  - sudo make install
