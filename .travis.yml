@@ -8,11 +8,11 @@ cache:
     - build
 script:
   - mkdir -p build && cd build
-  - cmake --version
 # note: you might need to clear the cache (https://travis-ci.org/Reaktoro/Reaktoro/caches)
 #  when you make changes to the cmake configuration
   - cmake .. -DBUILD_ALL=1
   - make
+  - make test
   - sudo make install
 
 
