@@ -3,4 +3,5 @@ platform: x64
 before_build:
   - md build
   - cd build
+  - set BOOST_INCLUDEDIR=C:\Libraries\boost_1_63_0
   - cmake -G "Visual Studio 15 Win64" ..
