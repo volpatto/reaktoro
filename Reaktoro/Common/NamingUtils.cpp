@@ -19,6 +19,7 @@
 
 // C++ includes
 #include <map>
+#include <cctype>
 
 // Reaktoro includes
 #include <Reaktoro/Common/Exception.hpp>
