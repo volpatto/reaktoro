@@ -3,8 +3,11 @@ dist: trusty
 sudo: required
 before_install:
   - sudo apt-get install libboost-dev
+cache:
+  directories:
+    - build
 script:
-  - mkdir build && cd build
+  - mkdir -p build && cd build
   - cmake --version
   - cmake ..
   - make
