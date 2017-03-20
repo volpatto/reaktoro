@@ -3,4 +3,4 @@ platform: x64
 before_build:
   - md build
   - cd build
-  - cmake -G "Visual Studio 15 Win64" -DCMAKE_INSTALL_PREFIX=%P%
+  - cmake -G "Visual Studio 15 Win64" ..
