@@ -113,7 +113,7 @@ endif()
 
 # Set the list of compiler flags for MSVC compiler
 if(${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
-    add_compile_options(/W0 -D_SCL_SECURE_NO_WARNINGS /MP4)
+    add_compile_options("/W0" -D_SCL_SECURE_NO_WARNINGS "/MP4")
 endif()
 
 # Set the project directory names
