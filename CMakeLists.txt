@@ -129,8 +129,7 @@ set(THIRDPARTY_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/thirdparty/install)
 
 # Set the include directories
 include_directories(${CMAKE_SOURCE_DIR})
-message("Boost dir: ${BOOST_INCLUDE_DIR}")
-include_directories(${BOOST_INCLUDE_DIR})
+include_directories(${Boost_INCLUDE_DIR})
 include_directories(${THIRDPARTY_INSTALL_PREFIX}/include)
 
 # Set the link directories
