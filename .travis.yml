@@ -5,16 +5,24 @@ before_install:
 - sudo apt-get install libboost-all-dev
 install:
 - pip install numpy
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-5
+    - g++-5
 cache:
   directories:
   - build
 script:
-- mkdir -p build && cd build
-- cmake .. -DBUILD_ALL=1
-- make
-- make test
-- make package
-- sudo make install
+  - sudo unlink /usr/bin/gcc && sudo ln -s /usr/bin/gcc-5 /usr/bin/gcc
+  - mkdir -p build && cd build
+  - cmake .. -DBUILD_ALL=1
+  - make
+  - make test
+  - make package
+  - sudo make install
 deploy:
   provider: releases
   api_key:
