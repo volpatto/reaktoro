@@ -16,9 +16,8 @@ cache:
   directories:
   - build
 script:
-  - sudo unlink /usr/bin/gcc && sudo ln -s /usr/bin/gcc-5 /usr/bin/gcc
   - mkdir -p build && cd build
-  - cmake .. -DBUILD_ALL=1
+  - cmake .. -DCMAKE_CXX_COMPILER=g++-5 -DCMAKE_C_COMPILER=gcc-5 -DBUILD_ALL=1
   - make -j2
   - make test
   - make package
