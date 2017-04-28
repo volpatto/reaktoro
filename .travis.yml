@@ -2,19 +2,26 @@ language: c++
 dist: trusty
 sudo: required
 before_install:
-  - sudo apt-get install libboost-all-dev
+- sudo apt-get install libboost-all-dev
 install:
-  - pip install numpy
+- pip install numpy
 cache:
   directories:
-    - build
+  - build
 script:
-  - mkdir -p build && cd build
-# note: you might need to clear the cache (https://travis-ci.org/Reaktoro/Reaktoro/caches)
-#  when you make changes to the cmake configuration
-  - cmake .. -DBUILD_ALL=1
-  - make
-  - make test
-  - sudo make install
-
-
+- mkdir -p build && cd build
+- cmake .. -DBUILD_ALL=1
+- make
+- make test
+- make package
+- sudo make install
+deploy:
+  provider: releases
+  api_key:
+    secure: dm8GAq2U5003BPrlzj+InxKO1FtAUUqe3TAh8MNaONjp61kZ1U6TTpxROGMSN18ezYYSZH+/6xbY6QDqGwH+ghEg4ql7faCbEIoqZXknbJ2cN6ST0ppgNLqe4Lpw7o/tDAJ2yvkaaJoARtwekcx9+5mGaEl+E41A+nwYD5SNB/EIpA4X+PcXI2WIy08rpWga8+FJpQWQ7WbrEHh3yBZQte0OOY0GP9gVQRV3kLFgNrMDiwGxz4o/H6cvSRc8IuUlGfLjgLgiHN+7+86+w7BnJ3goMMiH98zoQoxGO4qsvc8pGSdN+gXosJz+zyJtIjYk2+4VQv1VuMDaMx5cfJCPS1J2jQOiXTNES1a6LlyDA1erE8MK8UEkD75eFJ+L5avdIjdwXEOWLKYQy41p58qNlO01FIzRbjsj2yhbbTV2knoE+IFFCHg65YgGFa6nbFIpqjwjCB0R1KvxIBP0Fq5hgCGIax0HUxhlVMfj6ZuwA7Vf2gLF675tFA9lB2duGpWEAIyF1+p4/rFHZtwvLU/RWIb+rkP/Hr6CZ9P38H7Pl1IBYITPu/EsdM7xfjMVx49wN95ARgP9ec+UFlgde46wPvw9HaIfptFaG80h28BP+nN69RJuqSn68Bm8THRbaH0NQ7ElC3RTY33DK+QaiPIKnzCIPRYyRUdXKVYdgqeq+AE=
+  file:
+    - build/package/*.deb
+    - build/package/*.rpm
+    - build/package/*.tar.gz
+  on:
+    repo: Reaktoro/Reaktoro
