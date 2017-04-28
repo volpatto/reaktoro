@@ -2,7 +2,7 @@ language: c++
 dist: trusty
 sudo: required
 before_install:
-- sudo apt-get install libboost-all-dev librpmbuild3
+- sudo apt-get install libboost-all-dev rpm
 install:
 - pip install numpy pyinstaller
 addons:
