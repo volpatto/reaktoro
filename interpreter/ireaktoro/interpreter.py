@@ -135,7 +135,8 @@ class Interpreter:
         compounds = node
         if compounds == 'auto':
             self.editor.addAqueousPhaseWithElements(self.elements)
-        else self.editor.addAqueousPhase(compounds)
+        else:
+            self.editor.addAqueousPhase(compounds)
 
     def processGaseousPhaseNode(node, identifier):
         phasename = identifier
@@ -147,7 +148,8 @@ class Interpreter:
         compounds = node
         if compounds == 'auto':
             self.editor.addGaseousPhaseWithElements(self.elements)
-        else self.editor.addGaseousPhase(compounds)
+        else:
+            self.editor.addGaseousPhase(compounds)
 
     def processMineralPhaseNode(node, identifier):
         phasename = identifier
@@ -161,8 +163,9 @@ class Interpreter:
         if minerals == 'auto':
             for mineral in self.database.mineralSpeciesWithElements(self.elements):
                 self.editor.addPhase(MineralPhase(mineral))
-        else for mineral in minerals:
-            self.editor.addMineralPhase(mineral)
+        else:
+            for mineral in minerals:
+                self.editor.addMineralPhase(mineral)
 
     def processChemicalModelNode(node, identifier):
         pass
