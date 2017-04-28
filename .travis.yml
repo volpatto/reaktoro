@@ -19,7 +19,7 @@ script:
   - sudo unlink /usr/bin/gcc && sudo ln -s /usr/bin/gcc-5 /usr/bin/gcc
   - mkdir -p build && cd build
   - cmake .. -DBUILD_ALL=1
-  - make
+  - make -j2
   - make test
   - make package
   - sudo make install
