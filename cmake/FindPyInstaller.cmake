@@ -18,6 +18,9 @@ else()
         set(PYTHON_DIR "C:/Python27-w32/Scripts")
     endif()
     find_program(PYINSTALLER pyinstaller PATH ${PYTHON_DIR} NO_DEFAULT_PATH)
+    if(NOT PYINSTALLER)
+        find_program(PYINSTALLER pyinstaller PATH "C:/Python27/Scripts" NO_DEFAULT_PATH)
+    endif()
 endif()
 
 # Check if PyInstaller was found
