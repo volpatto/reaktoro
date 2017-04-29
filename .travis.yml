@@ -30,5 +30,6 @@ deploy:
     - build/package/*.deb
     - build/package/*.rpm
     - build/package/*.tar.gz
+  skip_cleanup: true
   on:
     repo: Reaktoro/Reaktoro
