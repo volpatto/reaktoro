@@ -1,6 +1,7 @@
 os: Visual Studio 2015
 platform: x64
 before_build:
+  - pip install numpy pyinstaller tabulate
   - md build
   - cd build
 # note: boost is not available for vs 2017 currently
