@@ -78,6 +78,17 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 option(BUILD_SHARED_LIBS "Build shared libraries." ON)
 option(BUILD_STATIC_LIBS "Build static libraries." ON)
 
+if(NOT BUILD_SHARED_LIBS AND NOT BUILD_STATIC_LIBS)
+  message( FATAL_ERROR "You must build at least a shared or a static version "
+                       "of the reaktoro library" )
+endif()
+
+if(BUILD_SHARED_LIBS)
+  set(REAKTORO_LIBRARIES ReaktoroShared)
+else()
+  set(REAKTORO_LIBRARIES ReaktoroStatic)
+endif()
+
 # Reaktoro currently is not setup to produce a dynamic library using MSVC, only static
 if(${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
     set(BUILD_SHARED_LIBS OFF)

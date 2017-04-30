@@ -11,7 +11,6 @@ file(GLOB_RECURSE SOURCE_FILES *.cpp)
 foreach(CPPFILE ${SOURCE_FILES})
   get_filename_component(filename ${CPPFILE} NAME_WE)
   add_executable(${filename} ${CPPFILE})
-  target_link_libraries(${filename} ReaktoroShared)
+  target_link_libraries(${filename} ${REAKTORO_LIBRARIES})
   add_test(NAME ${filename} COMMAND ${filename})
 endforeach()
-
