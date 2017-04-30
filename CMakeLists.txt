@@ -83,15 +83,15 @@ if(NOT BUILD_SHARED_LIBS AND NOT BUILD_STATIC_LIBS)
                        "of the reaktoro library" )
 endif()
 
+# Reaktoro currently is not setup to produce a dynamic library using MSVC, only static
+if(${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
+    set(BUILD_SHARED_LIBS OFF)
+endif()
+
 if(BUILD_SHARED_LIBS)
   set(REAKTORO_LIBRARIES ReaktoroShared)
 else()
   set(REAKTORO_LIBRARIES ReaktoroStatic)
-endif()
-
-# Reaktoro currently is not setup to produce a dynamic library using MSVC, only static
-if(${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
-    set(BUILD_SHARED_LIBS OFF)
 endif()
 
 # Define custom options
