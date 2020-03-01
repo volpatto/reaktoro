@@ -1,0 +1,6 @@
+dependencies:
+  - jupyter
+  - widgetsnbextension
+  - jupyter_contrib_nbextensions
+  - nb_conda
+  - matplotlib-base

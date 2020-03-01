@@ -12,6 +12,7 @@ includes:
   - {{ root }}/.dependencies/docs.devenv.yml
   - {{ root }}/.dependencies/tests.devenv.yml
   - {{ root }}/.dependencies/utilities.devenv.yml
+  - {{ root }}/.dependencies/jupyter.devenv.yml
 
 environment:
 
