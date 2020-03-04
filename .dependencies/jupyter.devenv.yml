@@ -4,3 +4,4 @@ dependencies:
   - jupyter_contrib_nbextensions
   - nb_conda
   - matplotlib-base
+  - seaborn
