@@ -23,6 +23,7 @@ environment:
 
   LD_LIBRARY_PATH:                                                   # [unix]
     - {{ root }}/artifacts/lib                                       # [unix]
+    - $CONDA_PREFIX/lib                                              # [unix]
 
   PATH:                                                              # [win]
     - {{ root }}\artifacts\bin                                       # [win]
