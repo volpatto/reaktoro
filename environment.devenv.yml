@@ -18,7 +18,6 @@ environment:
     - {{ root }}/artifacts/python/lib/python{{ python_version }}/site-packages   # [unix]
     - {{ root }}/build/lib/python{{ python_version }}/site-packages              # [unix]
     - {{ root }}/build/lib64/python{{ python_version }}/site-packages            # [unix]
-    - $CONDA_PREFIX/lib                                                          # [unix]
     - {{ root }}\artifacts\python\Lib\site-packages                              # [win]
     - {{ root }}\build\lib\python{{ python_version }}\site-packages              # [win]
 
