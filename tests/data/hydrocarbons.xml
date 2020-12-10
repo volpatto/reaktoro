@@ -1,19 +1,23 @@
 <?xml version="1.0" ?>
 <Database>
   <Element>
-    <Name>Butane</Name>
-    <MolarMass units="g/mol">142.29</MolarMass>
+    <Name>H</Name>
+    <MolarMass units="g/mol">1.00794</MolarMass>
+  </Element>
+  <Element>
+    <Name>C</Name>
+    <MolarMass units="g/mol">12.0107</MolarMass>
   </Element>
   <Species>
-    <Name>C10H22(g)</Name>
-    <Formula>C10H22</Formula>
-    <Elements>C(10)H(22)</Elements>
+    <Name>CH4(g)</Name>
+    <Formula>CH4</Formula>
+    <Elements>C(1)H(4)</Elements>
     <Type>Gaseous</Type>
-    <MolarMass units="g/mol">142.29</MolarMass>
-    <Gas>Decane</Gas>
-    <CriticalTemperature units="K">617.60</CriticalTemperature>
-    <CriticalPressure units="bar">21.04</CriticalPressure>
-    <AcentricFactor>0.574182221240689</AcentricFactor>
+    <MolarMass units="g/mol">16.0425</MolarMass>
+    <Gas>Methane</Gas>
+    <CriticalTemperature units="K">190.6</CriticalTemperature>
+    <CriticalPressure units="bar">46.04</CriticalPressure>
+    <AcentricFactor>0.0115</AcentricFactor>
     <Thermo>
       <HKF>
         <References>None</References>
@@ -28,10 +32,30 @@
       </HKF>
     </Thermo>
   </Species>
-  <Element>
-    <Name>Decane</Name>
-    <MolarMass units="g/mol">142.29</MolarMass>
-  </Element>
+  <Species>
+    <Name>C4H10(g)</Name>
+    <Formula>C4H10</Formula>
+    <Elements>C(4)H(10)</Elements>
+    <Type>Gaseous</Type>
+    <MolarMass units="g/mol">58.12</MolarMass>
+    <Gas>Butane</Gas>
+    <CriticalTemperature units="K">425.16</CriticalTemperature>
+    <CriticalPressure units="bar">38.0</CriticalPressure>
+    <AcentricFactor>0.1928</AcentricFactor>
+    <Thermo>
+      <HKF>
+        <References>None</References>
+        <Date>None</Date>
+        <Gf units="cal/mol">-999</Gf>
+        <Hf units="cal/mol">-999</Hf>
+        <Sr units="cal/(mol*K)">-999</Sr>
+        <a units="cal/(mol*K)">-999</a>
+        <b units="cal/(mol*K^2)">-999</b>
+        <c units="(cal*K)/mol">-999</c>
+        <Tmax units="K">1500.0</Tmax>
+      </HKF>
+    </Thermo>
+  </Species>
   <Species>
     <Name>C10H22(g)</Name>
     <Formula>C10H22</Formula>
@@ -39,9 +63,9 @@
     <Type>Gaseous</Type>
     <MolarMass units="g/mol">142.29</MolarMass>
     <Gas>Decane</Gas>
-    <CriticalTemperature units="K">617.60</CriticalTemperature>
+    <CriticalTemperature units="K">617.66</CriticalTemperature>
     <CriticalPressure units="bar">21.04</CriticalPressure>
-    <AcentricFactor>0.574182221240689</AcentricFactor>
+    <AcentricFactor>0.4902</AcentricFactor>
     <Thermo>
       <HKF>
         <References>None</References>
