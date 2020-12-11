@@ -37,6 +37,30 @@
     </Thermo>
   </Species>
   <Species>
+    <Name>CH4(l)</Name>
+    <Formula>CH4</Formula>
+    <Elements>CH4(1)</Elements>
+    <Type>Gaseous</Type>
+    <MolarMass units="g/mol">16.0425</MolarMass>
+    <Gas>Methane</Gas>
+    <CriticalTemperature units="K">190.6</CriticalTemperature>
+    <CriticalPressure units="bar">46.04</CriticalPressure>
+    <AcentricFactor>0.0115</AcentricFactor>
+    <Thermo>
+      <HKF>
+        <References>None</References>
+        <Date>None</Date>
+        <Gf units="cal/mol">0</Gf>
+        <Hf units="cal/mol">0</Hf>
+        <Sr units="cal/(mol*K)">0</Sr>
+        <a units="cal/(mol*K)">0</a>
+        <b units="cal/(mol*K^2)">0</b>
+        <c units="(cal*K)/mol">0</c>
+        <Tmax units="K">1500.0</Tmax>
+      </HKF>
+    </Thermo>
+  </Species>
+  <Species>
     <Name>C4H10(g)</Name>
     <Formula>C4H10</Formula>
     <Elements>C4H10(1)</Elements>
@@ -61,7 +85,55 @@
     </Thermo>
   </Species>
   <Species>
+    <Name>C4H10(l)</Name>
+    <Formula>C4H10</Formula>
+    <Elements>C4H10(1)</Elements>
+    <Type>Gaseous</Type>
+    <MolarMass units="g/mol">58.12</MolarMass>
+    <Gas>Butane</Gas>
+    <CriticalTemperature units="K">425.16</CriticalTemperature>
+    <CriticalPressure units="bar">38.0</CriticalPressure>
+    <AcentricFactor>0.1928</AcentricFactor>
+    <Thermo>
+      <HKF>
+        <References>None</References>
+        <Date>None</Date>
+        <Gf units="cal/mol">0</Gf>
+        <Hf units="cal/mol">0</Hf>
+        <Sr units="cal/(mol*K)">0</Sr>
+        <a units="cal/(mol*K)">0</a>
+        <b units="cal/(mol*K^2)">0</b>
+        <c units="(cal*K)/mol">0</c>
+        <Tmax units="K">1500.0</Tmax>
+      </HKF>
+    </Thermo>
+  </Species>
+  <Species>
     <Name>C10H22(g)</Name>
+    <Formula>C10H22</Formula>
+    <Elements>C10H22(1)</Elements>
+    <Type>Gaseous</Type>
+    <MolarMass units="g/mol">142.29</MolarMass>
+    <Gas>Decane</Gas>
+    <CriticalTemperature units="K">617.66</CriticalTemperature>
+    <CriticalPressure units="bar">21.04</CriticalPressure>
+    <AcentricFactor>0.4902</AcentricFactor>
+    <Thermo>
+      <HKF>
+        <References>None</References>
+        <Date>None</Date>
+        <Gf units="cal/mol">0</Gf>
+        <Hf units="cal/mol">0</Hf>
+        <Sr units="cal/(mol*K)">0</Sr>
+        <a units="cal/(mol*K)">0</a>
+        <b units="cal/(mol*K^2)">0</b>
+        <c units="(cal*K)/mol">0</c>
+        <Tmax units="K">1500.0</Tmax>
+      </HKF>
+    </Thermo>
+  </Species>
+  <Species>
+    <Name>C10H22(l)</Name>
     <Formula>C10H22</Formula>
     <Elements>C10H22(1)</Elements>
     <Type>Gaseous</Type>

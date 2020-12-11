@@ -39,8 +39,11 @@ def test_ternary_c1_c4_c10_mixture():
     molar_base = 1
     composition = molar_base * np.array([0.5, 0.42, 0.08])
 
-    db = reaktoro.Database('supcrt07.xml')
-    _add_hydrocarbons_to_database(db)
+    # db = reaktoro.Database('supcrt07.xml')
+    # _add_hydrocarbons_to_database(db)
+
+    # Using only the HC db
+    db = reaktoro.Database(str(get_test_data_dir() / 'hydrocarbons.xml'))
 
     editor = reaktoro.ChemicalEditor(db)
 
@@ -61,30 +64,23 @@ def test_ternary_c1_c4_c10_mixture():
 
     problem.setTemperature(temperature, 'degF')
     problem.setPressure(pressure, 'psi')
-    problem.add('CH4(g)', composition[0], 'mol')
-    problem.add('C4H10(g)', composition[1], 'mol')
-    problem.add('C10H22(g)', composition[2], 'mol')
+    problem.setElementAmount('CH4', composition[0])
+    problem.setElementAmount('C4H10', composition[1])
+    problem.setElementAmount('C10H22', composition[2])
 
-    state = reaktoro.ChemicalState(system)  # for debug purposes only
     solver = reaktoro.EquilibriumSolver(system)
 
     options = reaktoro.EquilibriumOptions()
     options.hessian = reaktoro.GibbsHessian.Exact
-    options.nonlinear.max_iterations = 1000
     options.optimum.max_iterations = 1000
-    options.optimum.ipnewton.step = reaktoro.StepMode.Conservative
-    options.optimum.tolerance = 1e-18
+    options.optimum.tolerance = 1e-10
+    # options.optimum.output.active = True
     solver.setOptions(options)
 
-    state = reaktoro.ChemicalState(system)
-
-    result = solver.solve(state, problem)
-    converged = result.optimum.succeeded
-    assert converged
+    state = reaktoro.equilibrate(problem, options)
 
     gas_phase_molar_fraction = state.phaseAmount('Gaseous') / molar_base
     liquid_molar_fraction = state.phaseAmount('Liquid') / molar_base
     phase_fractions = np.array([gas_phase_molar_fraction, liquid_molar_fraction])
     phase_fractions_expected = np.array([0.853401, 1 - 0.853401])  # Fv, Fl
     assert phase_fractions == pytest.approx(phase_fractions_expected, rel=5e-3)
-
