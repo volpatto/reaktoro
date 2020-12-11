@@ -39,16 +39,13 @@ def test_ternary_c1_c4_c10_mixture():
     molar_base = 1
     composition = molar_base * np.array([0.5, 0.42, 0.08])
 
-    # db = reaktoro.Database('supcrt07.xml')
-    # _add_hydrocarbons_to_database(db)
-
-    # Using only the HC db
-    db = reaktoro.Database(str(get_test_data_dir() / 'hydrocarbons.xml'))
+    db = reaktoro.Database('supcrt07.xml')
+    _add_hydrocarbons_to_database(db)
 
     editor = reaktoro.ChemicalEditor(db)
 
-    gaseous_species = ["CH4(g)", "C4H10(g)", "C10H22(g)"]
-    oil_species = ["CH4(liq)", "C4H10(liq)", "C10H22(liq)"]
+    gaseous_species = ["C1(g)", "C4(g)", "C10(g)"]
+    oil_species = ["C1(liq)", "C4(liq)", "C10(liq)"]
 
     eos_params = reaktoro.CubicEOSParams(
         model=reaktoro.CubicEOSModel.PengRobinson,
@@ -64,20 +61,11 @@ def test_ternary_c1_c4_c10_mixture():
 
     problem.setTemperature(temperature, 'degF')
     problem.setPressure(pressure, 'psi')
-    problem.setElementAmount('CH4', composition[0])
-    problem.setElementAmount('C4H10', composition[1])
-    problem.setElementAmount('C10H22', composition[2])
+    problem.setElementAmount('C1', composition[0])
+    problem.setElementAmount('C4', composition[1])
+    problem.setElementAmount('C10', composition[2])
 
-    solver = reaktoro.EquilibriumSolver(system)
-
-    options = reaktoro.EquilibriumOptions()
-    options.hessian = reaktoro.GibbsHessian.Exact
-    options.optimum.max_iterations = 1000
-    options.optimum.tolerance = 1e-10
-    # options.optimum.output.active = True
-    solver.setOptions(options)
-
-    state = reaktoro.equilibrate(problem, options)
+    state = reaktoro.equilibrate(problem)
 
     gas_phase_molar_fraction = state.phaseAmount('Gaseous') / molar_base
     liquid_molar_fraction = state.phaseAmount('Liquid') / molar_base

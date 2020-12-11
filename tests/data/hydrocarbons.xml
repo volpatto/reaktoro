@@ -1,24 +1,24 @@
 <?xml version="1.0" ?>
 <Database>
   <Element>
-    <Name>CH4</Name>
+    <Name>C1</Name>
     <MolarMass units="g/mol">16.0425</MolarMass>
   </Element>
   <Element>
-    <Name>C4H10</Name>
+    <Name>C4</Name>
     <MolarMass units="g/mol">58.12</MolarMass>
   </Element>
   <Element>
-    <Name>C10H22</Name>
+    <Name>C10</Name>
     <MolarMass units="g/mol">142.29</MolarMass>
   </Element>
   <Species>
-    <Name>CH4(g)</Name>
-    <Formula>CH4</Formula>
-    <Elements>CH4(1)</Elements>
+    <Name>C1(g)</Name>
+    <Formula>C1</Formula>
+    <Elements>C1(1)</Elements>
     <Type>Gaseous</Type>
     <MolarMass units="g/mol">16.0425</MolarMass>
-    <Gas>Methane</Gas>
+    <Gas>C1</Gas>
     <CriticalTemperature units="K">190.6</CriticalTemperature>
     <CriticalPressure units="bar">46.04</CriticalPressure>
     <AcentricFactor>0.0115</AcentricFactor>
@@ -37,12 +37,12 @@
     </Thermo>
   </Species>
   <Species>
-    <Name>CH4(l)</Name>
-    <Formula>CH4</Formula>
-    <Elements>CH4(1)</Elements>
+    <Name>C1(l)</Name>
+    <Formula>C1</Formula>
+    <Elements>C1(1)</Elements>
     <Type>Gaseous</Type>
     <MolarMass units="g/mol">16.0425</MolarMass>
-    <Gas>Methane</Gas>
+    <Gas>C1</Gas>
     <CriticalTemperature units="K">190.6</CriticalTemperature>
     <CriticalPressure units="bar">46.04</CriticalPressure>
     <AcentricFactor>0.0115</AcentricFactor>
@@ -61,12 +61,12 @@
     </Thermo>
   </Species>
   <Species>
-    <Name>C4H10(g)</Name>
-    <Formula>C4H10</Formula>
-    <Elements>C4H10(1)</Elements>
+    <Name>C4(g)</Name>
+    <Formula>C4</Formula>
+    <Elements>C4(1)</Elements>
     <Type>Gaseous</Type>
     <MolarMass units="g/mol">58.12</MolarMass>
-    <Gas>Butane</Gas>
+    <Gas>C4</Gas>
     <CriticalTemperature units="K">425.16</CriticalTemperature>
     <CriticalPressure units="bar">38.0</CriticalPressure>
     <AcentricFactor>0.1928</AcentricFactor>
@@ -85,12 +85,12 @@
     </Thermo>
   </Species>
   <Species>
-    <Name>C4H10(l)</Name>
-    <Formula>C4H10</Formula>
-    <Elements>C4H10(1)</Elements>
+    <Name>C4(l)</Name>
+    <Formula>C4</Formula>
+    <Elements>C4(1)</Elements>
     <Type>Gaseous</Type>
     <MolarMass units="g/mol">58.12</MolarMass>
-    <Gas>Butane</Gas>
+    <Gas>C4</Gas>
     <CriticalTemperature units="K">425.16</CriticalTemperature>
     <CriticalPressure units="bar">38.0</CriticalPressure>
     <AcentricFactor>0.1928</AcentricFactor>
@@ -109,12 +109,12 @@
     </Thermo>
   </Species>
   <Species>
-    <Name>C10H22(g)</Name>
-    <Formula>C10H22</Formula>
-    <Elements>C10H22(1)</Elements>
+    <Name>C10(g)</Name>
+    <Formula>C10</Formula>
+    <Elements>C10(1)</Elements>
     <Type>Gaseous</Type>
     <MolarMass units="g/mol">142.29</MolarMass>
-    <Gas>Decane</Gas>
+    <Gas>C10</Gas>
     <CriticalTemperature units="K">617.66</CriticalTemperature>
     <CriticalPressure units="bar">21.04</CriticalPressure>
     <AcentricFactor>0.4902</AcentricFactor>
@@ -133,12 +133,12 @@
     </Thermo>
   </Species>
   <Species>
-    <Name>C10H22(l)</Name>
-    <Formula>C10H22</Formula>
-    <Elements>C10H22(1)</Elements>
+    <Name>C10(l)</Name>
+    <Formula>C10</Formula>
+    <Elements>C10(1)</Elements>
     <Type>Gaseous</Type>
     <MolarMass units="g/mol">142.29</MolarMass>
-    <Gas>Decane</Gas>
+    <Gas>C10</Gas>
     <CriticalTemperature units="K">617.66</CriticalTemperature>
     <CriticalPressure units="bar">21.04</CriticalPressure>
     <AcentricFactor>0.4902</AcentricFactor>
