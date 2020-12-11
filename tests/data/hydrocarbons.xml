@@ -1,17 +1,21 @@
 <?xml version="1.0" ?>
 <Database>
   <Element>
-    <Name>H</Name>
-    <MolarMass units="g/mol">1.00794</MolarMass>
+    <Name>CH4</Name>
+    <MolarMass units="g/mol">16.0425</MolarMass>
   </Element>
   <Element>
-    <Name>C</Name>
-    <MolarMass units="g/mol">12.0107</MolarMass>
+    <Name>C4H10</Name>
+    <MolarMass units="g/mol">58.12</MolarMass>
+  </Element>
+  <Element>
+    <Name>C10H22</Name>
+    <MolarMass units="g/mol">142.29</MolarMass>
   </Element>
   <Species>
     <Name>CH4(g)</Name>
     <Formula>CH4</Formula>
-    <Elements>C(1)H(4)</Elements>
+    <Elements>CH4(1)</Elements>
     <Type>Gaseous</Type>
     <MolarMass units="g/mol">16.0425</MolarMass>
     <Gas>Methane</Gas>
@@ -22,12 +26,12 @@
       <HKF>
         <References>None</References>
         <Date>None</Date>
-        <Gf units="cal/mol">-999</Gf>
-        <Hf units="cal/mol">-999</Hf>
-        <Sr units="cal/(mol*K)">-999</Sr>
-        <a units="cal/(mol*K)">-999</a>
-        <b units="cal/(mol*K^2)">-999</b>
-        <c units="(cal*K)/mol">-999</c>
+        <Gf units="cal/mol">0</Gf>
+        <Hf units="cal/mol">0</Hf>
+        <Sr units="cal/(mol*K)">0</Sr>
+        <a units="cal/(mol*K)">0</a>
+        <b units="cal/(mol*K^2)">0</b>
+        <c units="(cal*K)/mol">0</c>
         <Tmax units="K">1500.0</Tmax>
       </HKF>
     </Thermo>
@@ -35,7 +39,7 @@
   <Species>
     <Name>C4H10(g)</Name>
     <Formula>C4H10</Formula>
-    <Elements>C(4)H(10)</Elements>
+    <Elements>C4H10(1)</Elements>
     <Type>Gaseous</Type>
     <MolarMass units="g/mol">58.12</MolarMass>
     <Gas>Butane</Gas>
@@ -46,12 +50,12 @@
       <HKF>
         <References>None</References>
         <Date>None</Date>
-        <Gf units="cal/mol">-999</Gf>
-        <Hf units="cal/mol">-999</Hf>
-        <Sr units="cal/(mol*K)">-999</Sr>
-        <a units="cal/(mol*K)">-999</a>
-        <b units="cal/(mol*K^2)">-999</b>
-        <c units="(cal*K)/mol">-999</c>
+        <Gf units="cal/mol">0</Gf>
+        <Hf units="cal/mol">0</Hf>
+        <Sr units="cal/(mol*K)">0</Sr>
+        <a units="cal/(mol*K)">0</a>
+        <b units="cal/(mol*K^2)">0</b>
+        <c units="(cal*K)/mol">0</c>
         <Tmax units="K">1500.0</Tmax>
       </HKF>
     </Thermo>
@@ -59,7 +63,7 @@
   <Species>
     <Name>C10H22(g)</Name>
     <Formula>C10H22</Formula>
-    <Elements>C(10)H(22)</Elements>
+    <Elements>C10H22(1)</Elements>
     <Type>Gaseous</Type>
     <MolarMass units="g/mol">142.29</MolarMass>
     <Gas>Decane</Gas>
@@ -70,12 +74,12 @@
       <HKF>
         <References>None</References>
         <Date>None</Date>
-        <Gf units="cal/mol">-999</Gf>
-        <Hf units="cal/mol">-999</Hf>
-        <Sr units="cal/(mol*K)">-999</Sr>
-        <a units="cal/(mol*K)">-999</a>
-        <b units="cal/(mol*K^2)">-999</b>
-        <c units="(cal*K)/mol">-999</c>
+        <Gf units="cal/mol">0</Gf>
+        <Hf units="cal/mol">0</Hf>
+        <Sr units="cal/(mol*K)">0</Sr>
+        <a units="cal/(mol*K)">0</a>
+        <b units="cal/(mol*K^2)">0</b>
+        <c units="(cal*K)/mol">0</c>
         <Tmax units="K">1500.0</Tmax>
       </HKF>
     </Thermo>
