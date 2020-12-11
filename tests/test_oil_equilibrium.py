@@ -24,7 +24,15 @@ def _add_hydrocarbons_to_database(db):
         db.addLiquidSpecies(species)
 
 
-def test_ternary_c1_c4_c10_mixture():
+@pytest.mark.parametrize(
+    "P, T, F_expected, x_expected, y_expected",
+    [
+        # psi, degF, [mol / mol], [mol / mol], [mol / mol]
+        (500, 280, [0.853401, 1 - 0.853401], [0.08588, 0.46349, 0.45064], [0.57114, 0.41253, 0.01633]),
+        # (1500, 280, [0.566844, 1 - 0.566844], [0.330082, 0.513307, 0.156611], [0.629843, 0.348699, 0.021457]),
+    ]
+)
+def test_ternary_c1_c4_c10_mixture(P, T, F_expected, x_expected, y_expected):
     """
     This is a ternary example from Whitson monograph. Retrieved from Problem 18 in
     Appendix B.
@@ -33,8 +41,8 @@ def test_ternary_c1_c4_c10_mixture():
         Whitson, C. H., & Brulé, M. R. (2000). Phase behavior (Vol. 20).
         Richardson, TX: Henry L. Doherty Memorial Fund of AIME, Society of Petroleum Engineers.
     """
-    temperature = 280  # degF
-    pressure = 500  # psi
+    temperature = T  # degF
+    pressure = P  # psi
 
     molar_base = 1
     composition = molar_base * np.array([0.5, 0.42, 0.08])
@@ -65,13 +73,18 @@ def test_ternary_c1_c4_c10_mixture():
     problem.setElementAmount('C4', composition[1])
     problem.setElementAmount('C10', composition[2])
 
-    state = reaktoro.equilibrate(problem)
+    options = reaktoro.EquilibriumOptions()
+    options.hessian = reaktoro.GibbsHessian.Exact
+    options.optimum.max_iterations = 10000
+    options.optimum.tolerance = 1e-8
+    # options.optimum.output.active = True
+
+    state = reaktoro.equilibrate(problem, options)
 
     gas_phase_molar_fraction = state.phaseAmount('Gaseous') / molar_base
     liquid_molar_fraction = state.phaseAmount('Liquid') / molar_base
     phase_fractions = np.array([gas_phase_molar_fraction, liquid_molar_fraction])
-    phase_fractions_expected = np.array([0.853401, 1 - 0.853401])  # Fv, Fl
-    assert phase_fractions == pytest.approx(phase_fractions_expected, rel=5e-3)
+    assert phase_fractions == pytest.approx(F_expected, rel=5e-3)
 
     c1_gas_fraction = state.speciesAmount('C1(g)') / phase_fractions[0]
     c4_gas_fraction = state.speciesAmount('C4(g)') / phase_fractions[0]
@@ -81,13 +94,8 @@ def test_ternary_c1_c4_c10_mixture():
         c4_gas_fraction,
         c10_gas_fraction
     ])
-    expected_equilibrium_gas_composition = np.array([
-        0.57114,
-        0.41253,
-        0.01633
-    ])
     assert equilibrium_gas_composition == pytest.approx(
-        expected_equilibrium_gas_composition,
+        y_expected,
         rel=2e-2
     )
 
@@ -99,12 +107,7 @@ def test_ternary_c1_c4_c10_mixture():
         c4_liq_fraction,
         c10_liq_fraction
     ])
-    expected_equilibrium_liq_composition = np.array([
-        0.08588,
-        0.46349,
-        0.45064
-    ])
     assert equilibrium_liq_composition == pytest.approx(
-        expected_equilibrium_liq_composition,
+        x_expected,
         rel=2e-2
     )
