@@ -111,7 +111,6 @@ def test_equilibrium_H2S_liq_gas(temperature, pressure, num_regression):
     
     problem = EquilibriumProblem(system)
     
-    
     problem.setTemperature(temperature, "K")
     problem.setPressure(pressure, "Pa")
     problem.add("H2S(g)", 1.0, "mol")
