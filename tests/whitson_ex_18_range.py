@@ -66,10 +66,10 @@ options.optimum.max_iterations = 1000
 options.optimum.tolerance = 1e-10
 options.optimum.output.active = False
 
-state = reaktoro.equilibrate(problem, options)
 solver = reaktoro.EquilibriumSolver(system)
 solver.setOptions(options)
 
+state = reaktoro.ChemicalState(system)
 pressure_values = np.linspace(50, 2000)
 phase_fractions_liquid = list()
 phase_fractions_gas = list()
