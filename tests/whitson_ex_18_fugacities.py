@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import pathlib
 
 import reaktoro
 
@@ -57,7 +58,8 @@ state = reaktoro.ChemicalState(system)
 state.setTemperature(temperature, 'degF')
 
 # Gathering pvtlib results
-df_pvtlib_result = pd.read_csv("./data/pvtlib_table_whitson18_fixed_T.csv")
+data_dir = pathlib.Path(__file__).parent.absolute() / "data"
+df_pvtlib_result = pd.read_csv(data_dir / "pvtlib_table_whitson18_fixed_T.csv")
 df_pvtlib_result_gas = df_pvtlib_result[df_pvtlib_result.phase_id == 1]
 df_pvtlib_result_liq = df_pvtlib_result[df_pvtlib_result.phase_id == 0]
 
@@ -66,9 +68,9 @@ activities_gas = list()
 pvtlib_fugacities_gas = list()
 for index, df_row in df_pvtlib_result_gas.iterrows():
     P = df_row.P
-    composition_0 = df_row.x0
-    composition_1 = df_row.x1
-    composition_2 = df_row.x2
+    composition_0 = df_row.y0
+    composition_1 = df_row.y1
+    composition_2 = df_row.y2
     state.setPressure(P, 'psi')
     state.setSpeciesAmount(gaseous_species[0], composition_0)
     state.setSpeciesAmount(gaseous_species[1], composition_1)

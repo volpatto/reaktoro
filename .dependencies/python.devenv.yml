@@ -8,3 +8,6 @@ dependencies:
   - tabulate
   - colorama
   - python={{ python_version }}
+  - jupyter
+  - jupyter_contrib_nbextensions
+  - jupyter_nbextensions_configurator
