@@ -63,20 +63,26 @@ problem.setElementAmount('C10', composition[2])
 options = reaktoro.EquilibriumOptions()
 options.hessian = reaktoro.GibbsHessian.Exact
 options.optimum.max_iterations = 1000
-options.optimum.tolerance = 1e-18
+options.optimum.tolerance = 1e-12
 options.optimum.output.active = False
 
 solver = reaktoro.EquilibriumSolver(system)
 solver.setOptions(options)
 
 state = reaktoro.ChemicalState(system)
+state.setSpeciesAmounts(0.001)  # start will all having 0.001 moles
+state.setSpeciesAmount("C1(g)",  0.50)  # overwrite amount of C1(g) (same below)
+state.setSpeciesAmount("C4(g)",  0.42)  
+state.setSpeciesAmount("C10(g)", 0.08)
+
 pressure_values = np.linspace(50, 2000)
 phase_fractions_liquid = list()
 phase_fractions_gas = list()
 pressure_values_converged = list()
 for P in pressure_values:
     problem.setPressure(P, 'psi')
-    solver.solve(state, problem)
+    has_converged = solver.solve(state, problem)
+    print(f"P = {P} psi; T = {temperature} degF; Converged? {has_converged.optimum.succeeded}")
 
     molar_base = state.phaseAmount('Gaseous') + state.phaseAmount('Liquid')
 
@@ -87,21 +93,6 @@ for P in pressure_values:
     phase_fractions_liquid.append(liquid_phase_molar_fraction)
 
     pressure_values_converged.append(P)
-
-    # Use previous solution as Initial Guess
-    previous_composition_x0 = state.speciesAmount("C1(liq)")
-    previous_composition_x1 = state.speciesAmount("C4(liq)")
-    previous_composition_x2 = state.speciesAmount("C10(liq)")
-    state.setSpeciesAmount(oil_species[0], previous_composition_x0)
-    state.setSpeciesAmount(oil_species[1], previous_composition_x1)
-    state.setSpeciesAmount(oil_species[2], previous_composition_x2)
-
-    previous_composition_y0 = state.speciesAmount("C1(g)")
-    previous_composition_y1 = state.speciesAmount("C4(g)")
-    previous_composition_y2 = state.speciesAmount("C10(g)")
-    state.setSpeciesAmount(gaseous_species[0], previous_composition_y0)
-    state.setSpeciesAmount(gaseous_species[1], previous_composition_y1)
-    state.setSpeciesAmount(gaseous_species[2], previous_composition_y2)
 
 phase_fractions_gas = np.array(phase_fractions_gas)
 phase_fractions_liquid = np.array(phase_fractions_liquid)
