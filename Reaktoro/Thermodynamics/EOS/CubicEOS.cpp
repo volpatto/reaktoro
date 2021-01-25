@@ -341,10 +341,14 @@ struct CubicEOS::Impl
         const auto cubic_size = cubicEOS_roots.size();
 
         std::vector<ChemicalScalar> Zs;
-        if (cubic_size == 1 || cubic_size == 2)
+        if (cubic_size == 1)
         {
-            //even if cubicEOS_roots has 2 roots, assume that the smallest does not have physical meaning
             Zs.push_back(ChemicalScalar(nspecies, cubicEOS_roots[0]));
+        }
+        if (cubic_size == 2)
+        {
+            Zs.push_back(ChemicalScalar(nspecies, cubicEOS_roots[0]));
+            Zs.push_back(ChemicalScalar(nspecies, cubicEOS_roots[1]));
         }
         else
         {
