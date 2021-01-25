@@ -67,7 +67,7 @@ problem.setElementAmount('C10', composition[2])
 options = reaktoro.EquilibriumOptions()
 options.hessian = reaktoro.GibbsHessian.Exact
 options.optimum.max_iterations = 1000
-options.optimum.tolerance = 1e-12
+options.optimum.tolerance = 1e-18
 options.optimum.output.active = False
 
 solver = reaktoro.EquilibriumSolver(system)

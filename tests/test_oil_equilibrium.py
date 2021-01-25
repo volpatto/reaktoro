@@ -29,7 +29,7 @@ def _add_hydrocarbons_to_database(db):
     [
         # psi, degF, [mol / mol], [mol / mol], [mol / mol]
         (500, 280, [0.853401, 1 - 0.853401], [0.08588, 0.46349, 0.45064], [0.57114, 0.41253, 0.01633]),
-        # (1500, 280, [0.566844, 1 - 0.566844], [0.330082, 0.513307, 0.156611], [0.629843, 0.348699, 0.021457]),
+        (1500, 280, [0.566844, 1 - 0.566844], [0.330082, 0.513307, 0.156611], [0.629843, 0.348699, 0.021457]),
     ]
 )
 def test_ternary_c1_c4_c10_mixture(P, T, F_expected, x_expected, y_expected):
@@ -44,8 +44,7 @@ def test_ternary_c1_c4_c10_mixture(P, T, F_expected, x_expected, y_expected):
     temperature = T  # degF
     pressure = P  # psi
 
-    molar_base = 1
-    composition = molar_base * np.array([0.5, 0.42, 0.08])
+    composition = np.array([0.5, 0.42, 0.08])  # molar fractions
 
     db = reaktoro.Database('supcrt07.xml')
     _add_hydrocarbons_to_database(db)
@@ -73,14 +72,19 @@ def test_ternary_c1_c4_c10_mixture(P, T, F_expected, x_expected, y_expected):
     problem.setElementAmount('C4', composition[1])
     problem.setElementAmount('C10', composition[2])
 
+    state = reaktoro.ChemicalState(system)
+
     options = reaktoro.EquilibriumOptions()
     options.hessian = reaktoro.GibbsHessian.Exact
-    options.optimum.max_iterations = 10000
-    options.optimum.tolerance = 1e-8
-    # options.optimum.output.active = True
+    options.optimum.max_iterations = 1000
+    options.optimum.tolerance = 1e-18
+    options.optimum.output.active = False
 
-    state = reaktoro.equilibrate(problem, options)
+    solver = reaktoro.EquilibriumSolver(system)
+    solver.setOptions(options)
+    solver.solve(state, problem)
 
+    molar_base = state.phaseAmount('Gaseous') + state.phaseAmount('Liquid')
     gas_phase_molar_fraction = state.phaseAmount('Gaseous') / molar_base
     liquid_molar_fraction = state.phaseAmount('Liquid') / molar_base
     phase_fractions = np.array([gas_phase_molar_fraction, liquid_molar_fraction])
