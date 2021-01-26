@@ -40,7 +40,7 @@
     <Name>C1(l)</Name>
     <Formula>C1</Formula>
     <Elements>C1(1)</Elements>
-    <Type>Gaseous</Type>
+    <Type>Liquid</Type>
     <MolarMass units="g/mol">16.0425</MolarMass>
     <Gas>C1</Gas>
     <CriticalTemperature units="K">190.6</CriticalTemperature>
@@ -88,7 +88,7 @@
     <Name>C4(l)</Name>
     <Formula>C4</Formula>
     <Elements>C4(1)</Elements>
-    <Type>Gaseous</Type>
+    <Type>Liquid</Type>
     <MolarMass units="g/mol">58.12</MolarMass>
     <Gas>C4</Gas>
     <CriticalTemperature units="K">425.16</CriticalTemperature>
@@ -136,7 +136,7 @@
     <Name>C10(l)</Name>
     <Formula>C10</Formula>
     <Elements>C10(1)</Elements>
-    <Type>Gaseous</Type>
+    <Type>Liquid</Type>
     <MolarMass units="g/mol">142.29</MolarMass>
     <Gas>C10</Gas>
     <CriticalTemperature units="K">617.66</CriticalTemperature>
