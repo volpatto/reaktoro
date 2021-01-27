@@ -72,17 +72,23 @@ def test_ternary_c1_c4_c10_mixture(P, T, F_expected, x_expected, y_expected):
     problem.setElementAmount('C4', composition[1])
     problem.setElementAmount('C10', composition[2])
 
+    # Custom initial guess below. This is necessary for hydrocarbon mixtures.
     state = reaktoro.ChemicalState(system)
+    state.setSpeciesAmounts(0.001)  # start will all having 0.001 moles
+    state.setSpeciesAmount("C1(g)", composition[0])  # overwrite amount of C1(g) (same below)
+    state.setSpeciesAmount("C4(g)", composition[1])  
+    state.setSpeciesAmount("C10(g)", composition[2])
 
     options = reaktoro.EquilibriumOptions()
     options.hessian = reaktoro.GibbsHessian.Exact
-    options.optimum.max_iterations = 1000
-    options.optimum.tolerance = 1e-18
-    options.optimum.output.active = False
+    # options.optimum.max_iterations = 1000
+    # options.optimum.tolerance = 1e-12
 
     solver = reaktoro.EquilibriumSolver(system)
     solver.setOptions(options)
-    solver.solve(state, problem)
+    result = solver.solve(state, problem)
+    
+    assert result.optimum.succeeded
 
     molar_base = state.phaseAmount('Gaseous') + state.phaseAmount('Liquid')
     gas_phase_molar_fraction = state.phaseAmount('Gaseous') / molar_base

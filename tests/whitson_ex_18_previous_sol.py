@@ -61,19 +61,17 @@ problem.setElementAmount('C4', composition[1])
 problem.setElementAmount('C10', composition[2])
 
 options = reaktoro.EquilibriumOptions()
-options.hessian = reaktoro.GibbsHessian.Exact
-options.optimum.max_iterations = 1000
-options.optimum.tolerance = 1e-12
-options.optimum.output.active = False
+options.hessian = reaktoro.GibbsHessian.Exact  # required change for this case
 
 solver = reaktoro.EquilibriumSolver(system)
 solver.setOptions(options)
 
+# In this case, we should provide a better initial guess instead of the default.
 state = reaktoro.ChemicalState(system)
 state.setSpeciesAmounts(0.001)  # start will all having 0.001 moles
-state.setSpeciesAmount("C1(g)",  0.50)  # overwrite amount of C1(g) (same below)
-state.setSpeciesAmount("C4(g)",  0.42)  
-state.setSpeciesAmount("C10(g)", 0.08)
+state.setSpeciesAmount("C1(g)", composition[0])  # overwrite amount of C1(g) (same below)
+state.setSpeciesAmount("C4(g)", composition[1])  
+state.setSpeciesAmount("C10(g)", composition[2])
 
 pressure_values = np.linspace(50, 2000)
 phase_fractions_liquid = list()
