@@ -340,10 +340,14 @@ struct CubicEOS::Impl
         const auto cubic_size = cubicEOS_roots.size();
 
         std::vector<ChemicalScalar> Zs;
-        if (cubic_size == 1 || cubic_size == 2)
+        if (cubic_size == 1)
         {
-            //even if cubicEOS_roots has 2 roots, assume that the smallest does not have physical meaning
             Zs.push_back(ChemicalScalar(nspecies, cubicEOS_roots[0]));
+        }
+        else if (cubic_size == 2)
+        {
+            Zs.push_back(ChemicalScalar(nspecies, cubicEOS_roots[0]));
+            Zs.push_back(ChemicalScalar(nspecies, cubicEOS_roots[1]));
         }
         else
         {
@@ -390,22 +394,22 @@ struct CubicEOS::Impl
             throw std::logic_error("CubicEOS received an unexpected phaseIdentificationMethod");
         }
 
-        if (identified_phase_type != input_phase_type)
-        {
+        // if (identified_phase_type != input_phase_type)
+        // {
             // Since the phase is identified as different than the expect input phase type, it is
             // deemed inappropriate. Artificially high values are configured for fugacities, so that
             // this condition is "removed" by the optimizer.
-            result.molar_volume = 0.0;
-            result.residual_molar_gibbs_energy = 0.0;
-            result.residual_molar_enthalpy = 0.0;
-            result.residual_molar_heat_capacity_cp = 0.0;
-            result.residual_molar_heat_capacity_cv = 0.0;
-            result.partial_molar_volumes.fill(0.0);
-            result.residual_partial_molar_gibbs_energies.fill(0.0);
-            result.residual_partial_molar_enthalpies.fill(0.0);
-            result.ln_fugacity_coefficients.fill(100.0);
-            return result;
-        }
+            // result.molar_volume = 0.0;
+            // result.residual_molar_gibbs_energy = 0.0;
+            // result.residual_molar_enthalpy = 0.0;
+            // result.residual_molar_heat_capacity_cp = 0.0;
+            // result.residual_molar_heat_capacity_cv = 0.0;
+            // result.partial_molar_volumes.fill(0.0);
+            // result.residual_partial_molar_gibbs_energies.fill(0.0);
+            // result.residual_partial_molar_enthalpies.fill(0.0);
+            // result.ln_fugacity_coefficients.fill(0.0);
+            // return result;
+        // }
 
         ChemicalScalar& V = result.molar_volume;
         ChemicalScalar& G_res = result.residual_molar_gibbs_energy;
