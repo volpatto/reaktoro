@@ -1,5 +1,7 @@
 import numpy as np
+import pytest
 
+import reaktoro
 from reaktoro import (
     ChemicalEditor,
     ChemicalState,
@@ -9,6 +11,13 @@ from reaktoro import (
     BinaryInteractionParams,
     CubicEOSParams
 )
+
+
+def get_test_data_dir():
+    from pathlib import Path
+    import os
+    return Path(os.path.abspath(__file__)).parents[0] / "data"
+
 
 
 def test_CubicEOS_multiple_roots():
