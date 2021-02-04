@@ -153,9 +153,9 @@ pressure_values = df_pvtlib_composition_liq["Pressure [Pa]"].values / 100000  # 
 
 plt.figure(figsize=(8, 6))
 
-plt.plot(pressure_values, activities_liq[:, 0], "-x", label="C1(liq) - Reaktoro")
+plt.plot(pressure_values, activities_liq[:, 2], "-x", label="C1(liq) - Reaktoro")
 plt.plot(pressure_values, pvtlib_fugacities_liq[:, 0], "-o", label="C1(liq) - pvtlib")
-plt.plot(pressure_values, activities_liq[:, 1], "-x", label="CO2(liq) - Reaktoro")
+plt.plot(pressure_values, activities_liq[:, 3], "-x", label="CO2(liq) - Reaktoro")
 plt.plot(pressure_values, pvtlib_fugacities_liq[:, 1], "-o", label="CO2(liq) - pvtlib")
 
 plt.xlabel("Pressure [bar]")

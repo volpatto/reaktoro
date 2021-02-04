@@ -83,24 +83,28 @@ df_pvtlib_result = pd.read_excel(
     sheet_name="Phase Composition"
 )
 
+df_pressures = df_pvtlib_result["Pressure [Pa]"].copy()
+df_pressures.drop_duplicates(inplace=True)
+
 pvtlib_phase_fractions_gas = df_pvtlib_result[df_pvtlib_result.Phase == 1]["Molar Fraction"].values
 pvtlib_pressure_values_gas = df_pvtlib_result[df_pvtlib_result.Phase == 1]["Pressure [Pa]"].values
 pvtlib_pressure_values_gas = pvtlib_pressure_values_gas / 100000  # to bar
-# pvtlib_pressure_values_gas.reset_index(drop=True, inplace=True)
 
 pvtlib_phase_fractions_liquid = df_pvtlib_result[df_pvtlib_result.Phase == 2]["Molar Fraction"].values
 pvtlib_pressure_values_liquid = df_pvtlib_result[df_pvtlib_result.Phase == 2]["Pressure [Pa]"].values
 pvtlib_pressure_values_liquid = pvtlib_pressure_values_liquid / 100000  # to bar
-# pvtlib_pressure_values_liquid.reset_index(drop=True, inplace=True)
 
-pressure_values = np.linspace(10, 75, 200)
+# Phase molar fractions
+pressure_values = df_pressures.values / 100000  # to bar
 phase_fractions_liquid = list()
 phase_fractions_gas = list()
+composition_liq = list()
+composition_gas = list()
 pressure_values_converged = list()
 for P in pressure_values:
     problem.setPressure(P, 'bar')
     has_converged = solver.solve(state, problem)
-    print(f"P = {P} bar; T = {temperature} degC; Converged? {has_converged.optimum.succeeded}")
+    print(f"P = {P:.3f} bar; T = {temperature} degC; Converged? {has_converged.optimum.succeeded}")
 
     molar_base = state.phaseAmount('Gaseous') + state.phaseAmount('Liquid')
 
@@ -109,6 +113,11 @@ for P in pressure_values:
 
     liquid_phase_molar_fraction = state.phaseAmount('Liquid') / molar_base
     phase_fractions_liquid.append(liquid_phase_molar_fraction)
+
+    gas_properties = state.speciesAmounts()
+    activities = np.exp(gas_properties.lnActivities().val)
+    activities_gas.append(activities)
+    pvtlib_fugacities_gas.append(fugacities)
 
     pressure_values_converged.append(P)
 

@@ -138,11 +138,11 @@ pressure_values = df_pvtlib_result_liq.P.values
 
 plt.figure(figsize=(8, 6))
 
-plt.plot(pressure_values, activities_liq[:, 0], "-x", label="C1(liq) - Reaktoro")
+plt.plot(pressure_values, activities_liq[:, 3], "-x", label="C1(liq) - Reaktoro")
 plt.plot(pressure_values, pvtlib_fugacities_liq[:, 0], "-o", label="C1(liq) - pvtlib")
-plt.plot(pressure_values, activities_liq[:, 1], "-x", label="C4(liq) - Reaktoro")
+plt.plot(pressure_values, activities_liq[:, 4], "-x", label="C4(liq) - Reaktoro")
 plt.plot(pressure_values, pvtlib_fugacities_liq[:, 1], "-o", label="C4(liq) - pvtlib")
-plt.plot(pressure_values, activities_liq[:, 2], "-x", label="C10(liq) - Reaktoro")
+plt.plot(pressure_values, activities_liq[:, 5], "-x", label="C10(liq) - Reaktoro")
 plt.plot(pressure_values, pvtlib_fugacities_liq[:, 2], "-o", label="C10(liq) - pvtlib")
 
 plt.xlabel("Pressure [psi]")
