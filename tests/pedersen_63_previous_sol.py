@@ -86,16 +86,20 @@ df_pvtlib_result = pd.read_excel(
 df_pressures = df_pvtlib_result["Pressure [Pa]"].copy()
 df_pressures.drop_duplicates(inplace=True)
 
-pvtlib_phase_fractions_gas = df_pvtlib_result[df_pvtlib_result.Phase == 1]["Molar Fraction"].values
-pvtlib_pressure_values_gas = df_pvtlib_result[df_pvtlib_result.Phase == 1]["Pressure [Pa]"].values
+df_pvtlib_result_gas = df_pvtlib_result[df_pvtlib_result.Phase == 1]
+pvtlib_phase_fractions_gas = df_pvtlib_result_gas["Molar Fraction"].values
+pvtlib_pressure_values_gas = df_pvtlib_result_gas["Pressure [Pa]"].values
 pvtlib_pressure_values_gas = pvtlib_pressure_values_gas / 100000  # to bar
 
-pvtlib_phase_fractions_liquid = df_pvtlib_result[df_pvtlib_result.Phase == 2]["Molar Fraction"].values
-pvtlib_pressure_values_liquid = df_pvtlib_result[df_pvtlib_result.Phase == 2]["Pressure [Pa]"].values
+df_pvtlib_result_liq = df_pvtlib_result[df_pvtlib_result.Phase == 2]
+pvtlib_phase_fractions_liquid = df_pvtlib_result_liq["Molar Fraction"].values
+pvtlib_pressure_values_liquid = df_pvtlib_result_liq["Pressure [Pa]"].values
 pvtlib_pressure_values_liquid = pvtlib_pressure_values_liquid / 100000  # to bar
 
 # Phase molar fractions
 pressure_values = df_pressures.values / 100000  # to bar
+num_of_components = len(gaseous_species)
+num_of_phases = 2
 phase_fractions_liquid = list()
 phase_fractions_gas = list()
 composition_liq = list()
@@ -114,15 +118,18 @@ for P in pressure_values:
     liquid_phase_molar_fraction = state.phaseAmount('Liquid') / molar_base
     phase_fractions_liquid.append(liquid_phase_molar_fraction)
 
-    gas_properties = state.speciesAmounts()
-    activities = np.exp(gas_properties.lnActivities().val)
-    activities_gas.append(activities)
-    pvtlib_fugacities_gas.append(fugacities)
+    mixture_properties = state.properties()
+    x_gas = mixture_properties.moleFractions().val[0:num_of_components]
+    composition_gas.append(x_gas)
+    x_liq = mixture_properties.moleFractions().val[num_of_components:num_of_phases * num_of_components]
+    composition_liq.append(x_liq)
 
     pressure_values_converged.append(P)
 
 phase_fractions_gas = np.array(phase_fractions_gas)
 phase_fractions_liquid = np.array(phase_fractions_liquid)
+composition_gas = np.array(composition_gas)
+composition_liq = np.array(composition_liq)
 pressure_values_converged = np.array(pressure_values_converged)
 
 plt.figure(figsize=(8, 6))
@@ -140,4 +147,36 @@ plt.legend(shadow=True)
 plt.grid(True)
 
 plt.savefig("reaktoro_pvtlib_using_prev_pedersen.png", dpi=300)
+plt.show()
+
+plt.figure(figsize=(8, 6))
+plt.plot(pressure_values_converged, composition_gas[:, 0], "-x", label="C1(g) - Reaktoro")
+plt.plot(pvtlib_pressure_values_gas, df_pvtlib_result_gas["C1"], "-x", label="C1(g) - pvtlib")
+plt.plot(pressure_values_converged, composition_gas[:, 1], "-x", label="CO2(g) - Reaktoro")
+plt.plot(pvtlib_pressure_values_gas, df_pvtlib_result_gas["CO2"], "-x", label="CO2(g) - pvtlib")
+
+plt.xlabel("Pressure [bar]")
+plt.ylabel("Molar fraction [mol / mol]")
+plt.title(f"Fixed T = {temperature} degC")
+plt.legend(shadow=True)
+
+plt.grid(True)
+
+plt.savefig("reaktoro_pvtlib_compositions_pedersen_gas.png", dpi=300)
+plt.show()
+
+plt.figure(figsize=(8, 6))
+plt.plot(pressure_values_converged, composition_liq[:, 0], "-x", label="C1(liq) - Reaktoro")
+plt.plot(pvtlib_pressure_values_liquid, df_pvtlib_result_liq["C1"], "-x", label="C1(liq) - pvtlib")
+plt.plot(pressure_values_converged, composition_liq[:, 1], "-x", label="CO2(liq) - Reaktoro")
+plt.plot(pvtlib_pressure_values_liquid, df_pvtlib_result_liq["CO2"], "-x", label="CO2(liq) - pvtlib")
+
+plt.xlabel("Pressure [bar]")
+plt.ylabel("Molar fraction [mol / mol]")
+plt.title(f"Fixed T = {temperature} degC")
+plt.legend(shadow=True)
+
+plt.grid(True)
+
+plt.savefig("reaktoro_pvtlib_compositions_pedersen_liq.png", dpi=300)
 plt.show()
