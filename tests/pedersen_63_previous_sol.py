@@ -155,12 +155,13 @@ plt.plot(pvtlib_pressure_values_gas, df_pvtlib_result_gas["C1"], "-x", label="C1
 plt.plot(pressure_values_converged, composition_gas[:, 1], "-x", label="CO2(g) - Reaktoro")
 plt.plot(pvtlib_pressure_values_gas, df_pvtlib_result_gas["CO2"], "-x", label="CO2(g) - pvtlib")
 
+plt.ylim([0, 1])
+plt.grid(True)
+
 plt.xlabel("Pressure [bar]")
 plt.ylabel("Molar fraction [mol / mol]")
 plt.title(f"Fixed T = {temperature} degC")
-plt.legend(shadow=True)
-
-plt.grid(True)
+plt.legend(shadow=True, ncol=2)
 
 plt.savefig("reaktoro_pvtlib_compositions_pedersen_gas.png", dpi=300)
 plt.show()
@@ -171,12 +172,13 @@ plt.plot(pvtlib_pressure_values_liquid, df_pvtlib_result_liq["C1"], "-x", label=
 plt.plot(pressure_values_converged, composition_liq[:, 1], "-x", label="CO2(liq) - Reaktoro")
 plt.plot(pvtlib_pressure_values_liquid, df_pvtlib_result_liq["CO2"], "-x", label="CO2(liq) - pvtlib")
 
+plt.ylim([0, 1])
+plt.grid(True)
+
 plt.xlabel("Pressure [bar]")
 plt.ylabel("Molar fraction [mol / mol]")
 plt.title(f"Fixed T = {temperature} degC")
-plt.legend(shadow=True)
-
-plt.grid(True)
+plt.legend(shadow=True, ncol=2)
 
 plt.savefig("reaktoro_pvtlib_compositions_pedersen_liq.png", dpi=300)
 plt.show()

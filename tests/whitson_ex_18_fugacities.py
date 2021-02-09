@@ -106,7 +106,7 @@ plt.legend(shadow=True)
 
 plt.grid(True)
 
-plt.savefig("reaktoro_pvtlib_fugacities_gas.png", dpi=300)
+plt.savefig("reaktoro_pvtlib_fugacities_gas_whitson.png", dpi=300)
 plt.show()
 
 # Properties' calculation loop for liq phase
@@ -152,5 +152,5 @@ plt.legend(shadow=True)
 
 plt.grid(True)
 
-plt.savefig("reaktoro_pvtlib_fugacities_liq.png", dpi=300)
+plt.savefig("reaktoro_pvtlib_fugacities_liq_whitson.png", dpi=300)
 plt.show()
