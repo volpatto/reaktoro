@@ -13,7 +13,7 @@ on:
     - cron: "0 5 * * 1"  # runs at 05:00 UTC on Mondays
 
 jobs:
-  publish-pypi:
+  publish:
 
     runs-on: ubuntu-latest
 
@@ -42,7 +42,7 @@ jobs:
             **/ccache
             ~/conda_pkgs_dir
           key:
-            ${{ runner.os }}-${{ github.ref }}-${{ github.event.ref }}-${{ env.CACHE_NUMBER }}
+            ${{ runner.os }}-${{ github.ref }}-${{ env.CACHE_NUMBER }}
 
       - uses: conda-incubator/setup-miniconda@v2
         with:
