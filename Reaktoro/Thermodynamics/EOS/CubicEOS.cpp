@@ -394,6 +394,7 @@ struct CubicEOS::Impl
             throw std::logic_error("CubicEOS received an unexpected phaseIdentificationMethod");
         }
 
+        // TODO: remove the code below.
         // if (identified_phase_type != input_phase_type)
         // {
             // Since the phase is identified as different than the expect input phase type, it is
