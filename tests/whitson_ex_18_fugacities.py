@@ -13,21 +13,6 @@ def get_test_data_dir():
     return Path(os.path.abspath(__file__)).parents[0] / "data"
 
 
-def _add_hydrocarbons_to_database(db):
-    hydrocarbons_db = reaktoro.Database(str(get_test_data_dir() / 'hydrocarbons.xml'))
-
-    element_names_in_db = set(e.name() for e in db.elements())
-    for element in hydrocarbons_db.elements():
-        if element.name() not in element_names_in_db:
-            db.addElement(element)
-
-    for species in hydrocarbons_db.gaseousSpecies():
-        db.addGaseousSpecies(species)
-
-    for species in hydrocarbons_db.liquidSpecies():
-        db.addLiquidSpecies(species)
-
-
 temperature = 280  # degF
 pressure = 500  # psi
 
