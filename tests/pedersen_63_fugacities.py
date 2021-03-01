@@ -64,10 +64,10 @@ state.setTemperature(temperature, 'degC')
 ## Gathering pvtlib results ##
 # Fugacities
 data_dir = pathlib.Path(__file__).parent.absolute() / "data"
-df_pvtlib_fugacities = pd.read_excel(data_dir / "pvtlib-pedersen63-flash-analysis.xlsx", sheet_name="Phase Fugacities")
+df_pvtlib_fugacities = pd.read_csv(data_dir / "pvtlib-pedersen63-phase-fugacities.csv")
 
 # Composition
-df_pvtlib_compositions = pd.read_excel(data_dir / "pvtlib-pedersen63-flash-analysis.xlsx", sheet_name="Phase Composition")
+df_pvtlib_compositions = pd.read_csv(data_dir / "pvtlib-pedersen63-phase-compositions.csv")
 
 # Normalizing fugacities
 P_1_atm_as_Pa = 101325.0

@@ -78,9 +78,8 @@ state.setSpeciesAmount("CO2(g)", composition[1])
 
 # Retrieve pvtlib solution
 data_dir = pathlib.Path(__file__).parent.absolute() / "data"
-df_pvtlib_result = pd.read_excel(
-    data_dir / "pvtlib-pedersen63-flash-analysis.xlsx", 
-    sheet_name="Phase Composition"
+df_pvtlib_result = pd.read_csv(
+    data_dir / "pvtlib-pedersen63-phase-compositions.csv",
 )
 
 df_pressures = df_pvtlib_result["Pressure [Pa]"].copy()
