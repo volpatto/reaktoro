@@ -8,6 +8,7 @@ dependencies:
   - tabulate
   - colorama
   - openpyxl
+  - setuptools>=49.0
   - python={{ python_version }}
   - jupyter
   - jupyter_contrib_nbextensions
