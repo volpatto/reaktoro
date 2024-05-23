@@ -236,7 +236,7 @@ TEST_CASE("Testing EquilibriumSolver", "[EquilibriumSolver]")
             result = solver.solve(state);
 
             CHECK( result.succeeded() );
-            CHECK( result.iterations() == 5 );
+            CHECK( result.iterations() <= 6 ); // macOS: 6 iterations, Linux & Windows: 5 iterations
             checkChemicalEquilibriumStateHasZeroDerivativeValues(state);
         }
     }
@@ -681,6 +681,6 @@ TEST_CASE("Testing EquilibriumSolver", "[EquilibriumSolver]")
         result = solver.solve(state);
 
         CHECK( result.succeeded() );
-        CHECK( result.iterations() == 32 );
+        CHECK( result.iterations() <= 32 ); // macOS: 28 iterations, Linux & Windows: 32 iterations
     }
 }
