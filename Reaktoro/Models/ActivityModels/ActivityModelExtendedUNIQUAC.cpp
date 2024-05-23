@@ -92,7 +92,7 @@ auto createActivityModelExtendedUNIQUAC(SpeciesList const& species, ActivityMode
     for(auto const& [formula, param] : params.r)
     {
         errorif(param <= 0.0, "The surface area parameter rᵢ in the Extended UNIQUAC model cannot be zero or negative: r[", formula, "] = ", param);
-        auto const ispecies = species.findWithFormula(formula);
+        auto const ispecies = species.findWithName(formula);
         if(ispecies >= species.size())
             continue;
         iR.push_back(ispecies);
@@ -102,7 +102,7 @@ auto createActivityModelExtendedUNIQUAC(SpeciesList const& species, ActivityMode
     for(auto const& [formula, param] : params.q)
     {
         errorif(param <= 0.0, "The volume parameter qᵢ in the Extended UNIQUAC model cannot be zero or negative: q[", formula, "] = ", param);
-        auto const ispecies = species.findWithFormula(formula);
+        auto const ispecies = species.findWithName(formula);
         if(ispecies >= species.size())
             continue;
         iQ.push_back(ispecies);
@@ -111,8 +111,8 @@ auto createActivityModelExtendedUNIQUAC(SpeciesList const& species, ActivityMode
 
     for(auto const& [formula1, formula2, params] : params.u)
     {
-        auto const ispecies1 = species.findWithFormula(formula1);
-        auto const ispecies2 = species.findWithFormula(formula2);
+        auto const ispecies1 = species.findWithName(formula1);
+        auto const ispecies2 = species.findWithName(formula2);
         if(ispecies1 >= species.size() || ispecies2 >= species.size())
             continue;
         iU.push_back(ispecies1);
