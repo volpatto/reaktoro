@@ -42,6 +42,8 @@ dependencies:
   - python ={{ python_version }}
   - reaktplot >=0.4.1
   - thermofun =0.4.5
+  - nbformat                               # needed if using plotly in Jupyter Notebooks in Visual Studio Code
+  - spdlog =1.12                           # needed to avoid issues with chemicalfun/thermofun's potential incompatibility with spdlog
   - tsl_ordered_map
   - valgrind  # [linux]
   - vs2019_win-64  # [win]
