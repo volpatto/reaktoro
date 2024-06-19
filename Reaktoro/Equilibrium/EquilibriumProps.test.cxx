@@ -37,26 +37,26 @@ TEST_CASE("Testing EquilibriumProps", "[EquilibriumProps]")
     // The G0 values of the chemical species in the test.
     Map<String, real> G0 =
     {
-        { "H2O",            -237181.72 },
-        { "H+",                   0.00 },
-        { "OH-",            -157297.48 },
-        { "H2",               17723.42 },
-        { "O2",               16543.54 },
-        { "Na+",            -261880.74 },
-        { "Cl-",            -131289.74 },
-        { "NaCl",           -388735.44 },
-        { "HCl",            -127235.44 },
-        { "NaOH",           -417981.60 },
-        { "Ca++",           -552790.08 },
-        { "Mg++",           -453984.92 },
-        { "CH4",             -34451.06 },
-        { "CO2",            -385974.00 },
-        { "HCO3-",          -586939.89 },
-        { "CO3--",          -527983.14 },
-        { "CaCl2",          -811696.00 },
-        { "CaCO3",         -1099764.40 },
-        { "MgCO3",          -998971.84 },
-        { "SiO2",           -833410.96 },
+        { "H2O(aq)",        -237181.72 },
+        { "H+(aq)",               0.00 },
+        { "OH-(aq)",        -157297.48 },
+        { "H2(aq)",           17723.42 },
+        { "O2(aq)",           16543.54 },
+        { "Na+(aq)",        -261880.74 },
+        { "Cl-(aq)",        -131289.74 },
+        { "NaCl(aq)",       -388735.44 },
+        { "HCl(aq)",        -127235.44 },
+        { "NaOH(aq)",       -417981.60 },
+        { "Ca++(aq)",       -552790.08 },
+        { "Mg++(aq)",       -453984.92 },
+        { "CH4(aq)",         -34451.06 },
+        { "CO2(aq)",        -385974.00 },
+        { "HCO3-(aq)",      -586939.89 },
+        { "CO3--(aq)",      -527983.14 },
+        { "CaCl2(aq)",      -811696.00 },
+        { "CaCO3(aq)",     -1099764.40 },
+        { "MgCO3(aq)",      -998971.84 },
+        { "SiO2(aq)",       -833410.96 },
         { "CO2(g)",         -394358.74 },
         { "O2(g)",                0.00 },
         { "H2(g)",                0.00 },
@@ -78,7 +78,7 @@ TEST_CASE("Testing EquilibriumProps", "[EquilibriumProps]")
     WHEN("there is an aqueous and gaseous solution")
     {
         Phases phases(db);
-        phases.add( AqueousPhase("H2O H+ OH- O2 H2 HCO3- CO2 CO3--" ) );
+        phases.add( AqueousPhase("H2O(aq) H+(aq) OH-(aq) O2(aq) H2(aq) HCO3-(aq) CO2(aq) CO3--(aq)" ) );
         phases.add( GaseousPhase("CO2(g) H2O(g) CH4(g)") );
 
         ChemicalSystem system(phases);
@@ -86,17 +86,17 @@ TEST_CASE("Testing EquilibriumProps", "[EquilibriumProps]")
         ChemicalState state(system);
         state.setTemperature(50.0, "celsius");
         state.setPressure(100.0, "bar");
-        state.set("H2O",    55.0,    "mol");
-        state.set("H+",     1.0e-7,  "mol");
-        state.set("OH-",    1.0e-7,  "mol");
-        state.set("O2",     1.0e-31, "mol");
-        state.set("H2",     2.0e-31, "mol");
-        state.set("HCO3-",  1.0e-3,  "mol");
-        state.set("CO2",    1.0e-1,  "mol");
-        state.set("CO3--",  1.0e-5,  "mol");
-        state.set("CO2(g)", 1.0,     "mol");
-        state.set("H2O(g)", 1.0e-3,  "mol");
-        state.set("CH4(g)", 1.0e-6,  "mol");
+        state.set("H2O(aq)",   55.0,    "mol");
+        state.set("H+(aq)",    1.0e-7,  "mol");
+        state.set("OH-(aq)",   1.0e-7,  "mol");
+        state.set("O2(aq)",    1.0e-31, "mol");
+        state.set("H2(aq)",    2.0e-31, "mol");
+        state.set("HCO3-(aq)", 1.0e-3,  "mol");
+        state.set("CO2(aq)",   1.0e-1,  "mol");
+        state.set("CO3--(aq)", 1.0e-5,  "mol");
+        state.set("CO2(g)",    1.0,     "mol");
+        state.set("H2O(g)",    1.0e-3,  "mol");
+        state.set("CH4(g)",    1.0e-6,  "mol");
 
         EquilibriumSpecs specs(system);
         specs.temperature();
@@ -120,8 +120,8 @@ TEST_CASE("Testing EquilibriumProps", "[EquilibriumProps]")
         const auto P  = 1.0e5; // in Pa
         const auto V  = 1.0;   // in m3
         const auto pH = 6.0;
-        const auto G0H2O = G0["H2O"] + 2000.0;
-        const auto G0HCO3 = G0["HCO3-"] + 1000.0;
+        const auto G0H2O = G0["H2O(aq)"] + 2000.0;
+        const auto G0HCO3 = G0["HCO3-(aq)"] + 1000.0;
 
         VectorXr w{{T, P, V, pH, G0H2O, G0HCO3}};
 
@@ -165,8 +165,8 @@ TEST_CASE("Testing EquilibriumProps", "[EquilibriumProps]")
         {
             const auto T = w[0];
             const auto P = w[1];
-            G0["H2O"] = w[4]; // set G0 of H2O according to input value in w (before update below!)
-            G0["HCO3-"] = w[5]; // set G0 of HCO3- according to input value in w (before update below!)
+            G0["H2O(aq)"] = w[4]; // set G0 of H2O according to input value in w (before update below!)
+            G0["HCO3-(aq)"] = w[5]; // set G0 of HCO3- according to input value in w (before update below!)
             ChemicalProps props(system);
             props.update(T, P, n);
             return props;
@@ -186,7 +186,7 @@ TEST_CASE("Testing EquilibriumProps", "[EquilibriumProps]")
     WHEN("there is an aqueous and gaseous solution -- temperature and pressure are unknown")
     {
         Phases phases(db);
-        phases.add( AqueousPhase("H2O H+ OH- O2 H2 HCO3- CO2 CO3--" ) );
+        phases.add( AqueousPhase("H2O(aq) H+(aq) OH-(aq) O2(aq) H2(aq) HCO3-(aq) CO2(aq) CO3--(aq)" ) );
         phases.add( GaseousPhase("CO2(g) H2O(g) CH4(g)") );
 
         ChemicalSystem system(phases);
@@ -194,17 +194,17 @@ TEST_CASE("Testing EquilibriumProps", "[EquilibriumProps]")
         ChemicalState state(system);
         state.setTemperature(50.0, "celsius");
         state.setPressure(100.0, "bar");
-        state.set("H2O",    55.0,    "mol");
-        state.set("H+",     1.0e-7,  "mol");
-        state.set("OH-",    1.0e-7,  "mol");
-        state.set("O2",     1.0e-31, "mol");
-        state.set("H2",     2.0e-31, "mol");
-        state.set("HCO3-",  1.0e-3,  "mol");
-        state.set("CO2",    1.0e-1,  "mol");
-        state.set("CO3--",  1.0e-5,  "mol");
-        state.set("CO2(g)", 1.0,     "mol");
-        state.set("H2O(g)", 1.0e-3,  "mol");
-        state.set("CH4(g)", 1.0e-6,  "mol");
+        state.set("H2O(aq)",    55.0,    "mol");
+        state.set("H+(aq)",     1.0e-7,  "mol");
+        state.set("OH-(aq)",    1.0e-7,  "mol");
+        state.set("O2(aq)",     1.0e-31, "mol");
+        state.set("H2(aq)",     2.0e-31, "mol");
+        state.set("HCO3-(aq)",  1.0e-3,  "mol");
+        state.set("CO2(aq)",    1.0e-1,  "mol");
+        state.set("CO3--(aq)",  1.0e-5,  "mol");
+        state.set("CO2(g)",     1.0,     "mol");
+        state.set("H2O(g)",     1.0e-3,  "mol");
+        state.set("CH4(g)",     1.0e-6,  "mol");
 
         EquilibriumSpecs specs(system);
         specs.volume();
