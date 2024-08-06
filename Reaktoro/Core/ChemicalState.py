@@ -21,6 +21,11 @@ import numpy as npy
 import pytest
 
 
+def obtainPhaseProps(state, phase):
+    """Return phase properties in a separate function to test the bindings."""
+    return state.props().phaseProps(phase)
+
+
 def testChemicalState():
     db = SupcrtDatabase("supcrtbl")
 
@@ -176,12 +181,15 @@ def testChemicalState():
     scaled = ChemicalState(state)
     scaled.scalePhaseAmount("AqueousPhase", 1.0, "mol")
     scaled.props().update(scaled)
-    assert scaled.props().phaseProps("AqueousPhase").amount().val() == pytest.approx(1.0)
+    # Keep the object returned by phaseProps to later check that it wasn't invalidated.
+    phase_props1 = obtainPhaseProps(scaled, "AqueousPhase")
+    assert phase_props1.amount().val() == pytest.approx(1.0)
 
     scaled = ChemicalState(state)
     scaled.scalePhaseAmount("GaseousPhase", 1.0, "mol")
     scaled.props().update(scaled)
-    assert scaled.props().phaseProps("GaseousPhase").amount().val() == pytest.approx(1.0)
+    phase_props2 = obtainPhaseProps(scaled, "GaseousPhase")
+    assert phase_props2.amount().val() == pytest.approx(1.0)
 
     scaled = ChemicalState(state)
     scaled.scaleFluidAmount(2.0, "mol")
@@ -317,3 +325,7 @@ def testChemicalState():
     otherstate.setTemperature(1234, "K")
 
     assert state.temperature() == 321  # ensure state was not changed with changing otherstate above!
+    
+    # Check that objects returned from phaseProps weren't invalidated.
+    assert phase_props1.amount().val() == pytest.approx(1.0)
+    assert phase_props2.amount().val() == pytest.approx(1.0)
