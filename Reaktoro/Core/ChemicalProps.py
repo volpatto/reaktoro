@@ -20,6 +20,7 @@ from reaktoro import *
 import pytest
 from math import *
 
+
 @pytest.fixture
 def database() -> Database:
     return Database([
@@ -50,7 +51,7 @@ def testChemicalProps(database: Database) -> None:
     assert props.speciesMoleFractions() == [0.3, 0.7]
     assert props.speciesActivitiesLn().asarray() == pytest.approx([log(3.0), log(7.0)])
     # Partial molar volumes are only evaluated for phases with activity models with cubic EoSs.
-    assert props.speciesPartialMolarVolumes() == 0.
+    assert props.speciesPartialMolarVolumes() == 0.0
 
 
 def testChemicalPropsPengRobinsonPartialMolarVolumes(database: Database) -> None:

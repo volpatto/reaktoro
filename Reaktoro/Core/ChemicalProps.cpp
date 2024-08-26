@@ -453,6 +453,12 @@ auto ChemicalProps::speciesStandardVolumeP(StringOrIndex species) const -> real
     return VP0[ispecies];
 }
 
+auto ChemicalProps::speciesCorrectiveMolarVolume(StringOrIndex species) const -> real
+{
+    const auto ispecies = detail::resolveSpeciesIndexOrRaiseError(msystem, species);
+    return Vxi[ispecies];
+}
+
 auto ChemicalProps::speciesStandardGibbsEnergy(StringOrIndex species) const -> real
 {
     const auto ispecies = detail::resolveSpeciesIndexOrRaiseError(msystem, species);
