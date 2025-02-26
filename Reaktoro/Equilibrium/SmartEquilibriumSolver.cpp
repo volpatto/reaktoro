@@ -270,6 +270,7 @@ struct SmartEquilibriumSolver::Impl
             dc = c - c0;
 
             using std::abs;
+            using std::isnan;
 
             for(auto ispecies : iprimary0)
             {
