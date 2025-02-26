@@ -44,7 +44,7 @@ ReaktoroFindPackage(yaml-cpp 0.6.3 REQUIRED)
 
 # Optional dependencies
 ReaktoroFindPackage(Catch2 2.6.2)
-ReaktoroFindPackage(Python COMPONENTS Interpreter Development)
+ReaktoroFindPackage(Python COMPONENTS Interpreter Development VERSION 3)
 ReaktoroFindPackage(pybind11 2.10.0)
 ReaktoroFindPackage(reaktplot 0.4.1)
 
