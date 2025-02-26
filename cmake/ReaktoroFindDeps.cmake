@@ -23,6 +23,7 @@ function(ReaktoroFindPackage name)
     endif()
     if(${name} MATCHES "Python" AND ${name}_FOUND)
         set(${name}_DIR ${Python_EXECUTABLE})  # Python_EXECUTABLE is the path to the python interpreter and not Python_DIR as usual
+        set(${Python3_EXECUTABLE} ${Python_EXECUTABLE})  # Set Python3_EXECUTABLE in addition to Python_EXECUTABLE for compatibility with FindPython3
     endif()
     if(${name}_FOUND)
         message(STATUS "Found ${name}: ${${name}_DIR} (found version \"${${name}_VERSION}\")")
@@ -44,8 +45,8 @@ ReaktoroFindPackage(yaml-cpp 0.6.3 REQUIRED)
 
 # Optional dependencies
 ReaktoroFindPackage(Catch2 2.6.2)
-ReaktoroFindPackage(Python COMPONENTS Interpreter Development VERSION 3)
-ReaktoroFindPackage(pybind11 2.10.0)
+ReaktoroFindPackage(Python 3.7 COMPONENTS Interpreter Development REQUIRED)
+ReaktoroFindPackage(pybind11 2.10.0 CONFIG REQUIRED)
 ReaktoroFindPackage(reaktplot 0.4.1)
 
 if(REAKTORO_BUILD_TESTS)
