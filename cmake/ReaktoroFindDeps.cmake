@@ -23,7 +23,7 @@ function(ReaktoroFindPackage name)
     endif()
     if(${name} MATCHES "Python" AND ${name}_FOUND)
         set(${name}_DIR ${Python_EXECUTABLE})  # Python_EXECUTABLE is the path to the python interpreter and not Python_DIR as usual
-        set(${Python3_EXECUTABLE} ${Python_EXECUTABLE})  # Set Python3_EXECUTABLE in addition to Python_EXECUTABLE for compatibility with FindPython3
+        set(${name}_EXECUTABLE ${${name}_EXECUTABLE} PARENT_SCOPE)  # export to parent (e.g., Eigen3_FOUND, Python_FOUND)
     endif()
     if(${name}_FOUND)
         message(STATUS "Found ${name}: ${${name}_DIR} (found version \"${${name}_VERSION}\")")
